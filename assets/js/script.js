@@ -7,13 +7,15 @@ const num = "0123456789";
 const char = "\u0021\u0022\u0023\u0024\u0025\u0026\u0027\u0028\u0029\u002A\u002B\u002C\u002D\u002E\u002F\u003A\u003B\u003C\u003D\u003E\u003F\u0040\u005B\u005C\u005D\u005E\u005F\u0060\u007B\u007C\u007D\u007E";
 const options = [alphLower,alphUpper,num,char];
 
-console.log(options)
+
 // Write password to the #password input
 function writePassword() {
-  // passwordLength();
-  passwordCharacters();
+  var length = 10//Number(window.prompt("Please select a length for the password between 8 and 128", ));
+  passwordLength(length);
+  var var_list = passwordAttributes();
+  generatePassword(length,var_list[0],var_list[1],var_list[2],var_list[3])
 
-  var password = generatePassword();
+  // var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -23,88 +25,52 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 // Function for setting password length
-function passwordLength() {
-    var length = Number(window.prompt("Please select a length for the password between 8 and 128", ));
-    console.log(typeof(length))
+function passwordLength(length) {
     if (length < 8) {
       window.alert("Password is to short");
       passwordLength();
     } else if (length > 128) {
       window.alert("Password is to long");
       passwordLength();
-    } else {}
+    } else {
+    }
 }
 
-function passwordCharacters() {
+function passwordAttributes() {
   window.alert("Should the password include the following? Please type Y/N")
-  // var options = [];
-  lowerCase();
-  upperCase();
-  numeric();
-  specialCharacters();
+  var lc = "Y"//window.prompt("Lowercase? (Y/N)",);
+  var lc_val = logic(lc);
+  var uc = "N"//window.prompt("Uppercase? (Y/N)",);
+  var uc_val = logic(uc);
+  var n = "Y"//window.prompt("Numeric? (Y/N)",);
+  var n_val = logic(n);
+  var sc = "Y"//window.prompt("Special Characters? (Y/N)",);
+  var sc_val = logic(sc);
+  var var_list = [lc_val,uc_val,n_val,sc_val];
+  return var_list
 }
 
-function lowerCase() {
-  var lc = window.prompt("Lowercase?",);
-  if (lc=="Y" || lc=="N") {
-    if (lc == "Y"){
-      lc_val = 1;
-    } else {lc_val = 0;
+function logic(num) {
+  if (num=="Y" || num=="N") {
+    if (num == "Y"){
+      num_val = 1;
+    } else {
+      num_val = 0;
     }
   } else {
     window.alert("please enter 'Y' or 'N'");
-    lowerCase();
+    logic();
   }
-  return lc_val;
+  return num_val;
 }
 
-function upperCase() {
-  var uc = window.prompt("Uppercase?",);
-  if (uc=="Y" || uc=="N") {
-    if (uc == "Y"){
-      uc_val = 1;
-    } else {uc_val = 0;
-    }
-  } else {
-    window.alert("please enter 'Y' or 'N'");
-    upperCase();
-  }
-  return uc_val;
+function generatePassword(length,var1,var2,var3,var4) {
+  var includedVariables = var1+var2+var3+var4;
+  console.log(includedVariables);
+  var divLength = Math.floor(length/includedVariables);
+
+  console.log(divLength);
+  var remainder = length%includedVariables;
+  console.log(remainder);
+  var randomList = alphLower[Math.round(Math.random()*alphLower.length)] + alphUpper[Math.round(Math.random()*alphUpper.length)];
 }
-
-function numeric() {
-  var n = window.prompt("Numeric?",);
-  if (n=="Y" || n=="N") {
-    if (n == "Y"){
-      n_val = 1;
-    } else {n_val = 0;
-    }
-  } else {
-    window.alert("please enter 'Y' or 'N'");
-    numeric();
-  }
-  return n_val;
-}
-
-function specialCharacters() {
-  var sc = window.prompt("Special Characters?",);
-  if (sc=="Y" || sc=="N") {
-    if (sc == "Y"){
-      sc_val = 1;
-    } else {sc_val = 0;
-    }
-  } else {
-    window.alert("please enter 'Y' or 'N'");
-    specialCharacters();
-  }
-  return sc_val;
-}
-
-
-  // function variableDistribution(var_lc,var_uc,var_n,var_sc) {
-  //   var includedVariables = var_lc+var_uc+var_n+var_sc;
-  //   var divLength = Math.floor(length/includedVariables);
-  //   var divLengthRemainder = length%includedVariables;
-
-  //   var randomList = alphLower[Math.round(Math.random()*alphLower.length)] + alphUpper[Math.round(Math.random()*alphUpper.length)];
-  // }
