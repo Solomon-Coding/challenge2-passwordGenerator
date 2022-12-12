@@ -1,11 +1,19 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+//Constants declarations
 const alphLower = "abcdefghijklmnopqrstuvwxyz";
 const alphUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const num = "0123456789";
 const char = "\u0021\u0022\u0023\u0024\u0025\u0026\u0027\u0028\u0029\u002A\u002B\u002C\u002D\u002E\u002F\u003A\u003B\u003C\u003D\u003E\u003F\u0040\u005B\u005C\u005D\u005E\u005F\u0060\u007B\u007C\u007D\u007E";
 const options = [alphLower,alphUpper,num,char];
+
+//Variable declarations
+var passLength = 8;
+var lc_val = 1;
+var uc_val = 1;
+var n_val = 1;
+var sc_val = 1;
 
 // Write password to the #password input
 function writePassword() {
@@ -21,10 +29,9 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 // Function for setting password length
-var passLength = 0;
+
 function passwordLength() {
   passLength = Number(window.prompt("Please select a length for the password between 8 and 128", ));
-  console.log(passLength)
   if (passLength < 8) {
       window.alert("Password is to short");
       passwordLength();
@@ -33,21 +40,35 @@ function passwordLength() {
       passwordLength();
     } else {   
     }
-    console.log(passLength)
-    return passLength;
+  return passLength;
 }
 
 function passwordAttributes() {
   window.alert("Should the password include the following? Please type Y/N")
-  var lc = window.prompt("Lowercase? (Y/N)",);
-  var lc_val = logic(lc);
-  var uc = window.prompt("Uppercase? (Y/N)",);
-  var uc_val = logic(uc);
-  var n = window.prompt("Numeric? (Y/N)",);
-  var n_val = logic(n);
-  var sc = window.prompt("Special Characters? (Y/N)",);
-  var sc_val = logic(sc);
+  var lc = String(window.prompt("Lowercase? (Y/N)",));
+  if (lc=="n"){
+    lc="N";
+  }
+  lc_val = logic(lc);
+  var uc = String(window.prompt("Uppercase? (Y/N)",));
+  if (uc=="n"){
+    uc="N";
+  }
+  uc_val = logic(uc);
+  var n = String(window.prompt("Numeric? (Y/N)",));
+  if (n=="n"){
+    n="N"
+  }
+  n_val = logic(n);
+  var sc = String(window.prompt("Special Characters? (Y/N)",));
+  if (sc=="n"){
+    sc="N"
+  }
+  sc_val = logic(sc);
+
+  //Ideal method for loop
   if (lc=="N"&&uc=="N"&&n=="N"&&sc=="N"){
+    window.alert("You must select at least one of the following password characteristics")
     passwordAttributes();
   } else {}
   var var_list = [lc_val,uc_val,n_val,sc_val];
