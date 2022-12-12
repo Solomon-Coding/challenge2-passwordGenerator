@@ -9,8 +9,7 @@ const options = [alphLower,alphUpper,num,char];
 
 // Write password to the #password input
 function writePassword() {
-  var length = Number(window.prompt("Please select a length for the password between 8 and 128", ));
-  passwordLength(length);
+  var length = passwordLength();
   var var_list = passwordAttributes();
   var password = generatePassword(length,var_list);
   var passwordText = document.querySelector("#password");
@@ -22,15 +21,20 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 // Function for setting password length
-function passwordLength(length) {
-    if (length < 8) {
+var passLength = 0;
+function passwordLength() {
+  passLength = Number(window.prompt("Please select a length for the password between 8 and 128", ));
+  console.log(passLength)
+  if (passLength < 8) {
       window.alert("Password is to short");
       passwordLength();
-    } else if (length > 128) {
+    } else if (passLength > 128) {
       window.alert("Password is to long");
       passwordLength();
-    } else {
+    } else {   
     }
+    console.log(passLength)
+    return passLength;
 }
 
 function passwordAttributes() {
@@ -50,12 +54,13 @@ function passwordAttributes() {
   return var_list;
 }
 
+// Function the checks the user input for password options
 function logic(num) {
-  if (num=="Y" || num=="N") {
-    if (num == "Y"){
+  if (num=="Y"||num=="N"||num=="y"||num=="n")  {
+    if (num == "Y"||num=="y"){
       num_val = 1;
     } else {
-      num_val = 0;
+      num_val = 0;  
     }
   } else {
     window.alert("please enter 'Y' or 'N'");
@@ -89,7 +94,6 @@ function generatePassword(length,vars) {
   }
   var randNum = shuffle(combinedString,length);
   return randNum;
-  
 }
 
 function randomize(array,terms) {
