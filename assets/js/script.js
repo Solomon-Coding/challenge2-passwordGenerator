@@ -31,12 +31,12 @@ generateBtn.addEventListener("click", writePassword);
 // Function for setting password length
 
 function passwordLength() {
-  passLength = Number(window.prompt("Please select a length for the password between 8 and 128", ));
+  passLength = Number(window.prompt("Please select a length for the password between 8 and 128.", ));
   if (passLength < 8) {
-      window.alert("Password is to short");
+      window.alert("Password is too short.");
       passwordLength();
     } else if (passLength > 128) {
-      window.alert("Password is to long");
+      window.alert("Password is too long.");
       passwordLength();
     } else {   
     }
@@ -44,7 +44,7 @@ function passwordLength() {
 }
 
 function passwordAttributes() {
-  window.alert("Should the password include the following? Please type Y/N")
+  window.alert("Should the password include the following? Please type Y/N.")
   var lc = String(window.prompt("Lowercase? (Y/N)",));
   if (lc=="n"){
     lc="N";
@@ -68,7 +68,7 @@ function passwordAttributes() {
 
   //Ideal method for loop
   if (lc=="N"&&uc=="N"&&n=="N"&&sc=="N"){
-    window.alert("You must select at least one of the following password characteristics")
+    window.alert("You must select at least one of the following password characteristics.")
     passwordAttributes();
   } else {}
   var var_list = [lc_val,uc_val,n_val,sc_val];
@@ -84,7 +84,7 @@ function logic(num) {
       num_val = 0;  
     }
   } else {
-    window.alert("please enter 'Y' or 'N'");
+    window.alert("Please enter 'Y' or 'N'.");
     logic();
   }
   return num_val;
